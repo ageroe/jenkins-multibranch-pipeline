@@ -41,6 +41,6 @@ public class Article {
 
     @Override
     public String toString() {
-        return String.format("Article(id:%d,name:%s,price:%.2f", id, name, price);
+        return String.format("Article(id:%d,name:%s,price:%.2f)", id, name, price);
     }
 }
