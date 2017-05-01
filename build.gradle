@@ -10,6 +10,11 @@ repositories {
     mavenCentral()
 }
 
+jacoco {
+    toolVersion = "0.7.6.201602180812"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
 jar {
     manifest {
         attributes(
