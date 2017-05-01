@@ -34,6 +34,24 @@ public class BasketTest {
     }
 
     @Test
+    public void testCalculateOutstandingPrice() throws Exception {
+        assertEquals(2237.1643, basket.calculateOutstandingPrice(), .001);
+    }
+
+    @Test
+    public void testCalculateOutstandingPriceOnePayment() throws Exception {
+        basket.addPayment(new Payment(Payment.Method.CASH, 100));
+        assertEquals(2137.1643, basket.calculateOutstandingPrice(), .001);
+    }
+
+    @Test
+    public void testCalculatePaidPriceTwoPayments() throws Exception {
+        basket.addPayment(new Payment(Payment.Method.CASH, 100));
+        basket.addPayment(new Payment(Payment.Method.CREDIT, 99.99));
+        assertEquals(199.99, basket.calculatePaidPrice(), .001);
+    }
+
+    @Test
     public void testCalculateTotalAmount() throws Exception {
         assertEquals(4, basket.calculateTotalAmount());
     }

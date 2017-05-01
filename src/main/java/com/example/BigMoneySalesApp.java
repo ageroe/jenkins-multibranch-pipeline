@@ -12,6 +12,13 @@ public class BigMoneySalesApp {
         basket.addBasketEntry(a2, 4);
         basket.addBasketEntry(a3, 5);
 
+        Payment p1 = new Payment(Payment.Method.PAYPAL, 300);
+        Payment p2 = new Payment(Payment.Method.CASH, 200);
+        Payment p3 = new Payment(Payment.Method.CREDIT, 100);
+        basket.addPayment(p1);
+        basket.addPayment(p2);
+        basket.addPayment(p3);
+
         String basketString = basket.toString();
 
         System.out.println(basketString);

@@ -11,6 +11,11 @@ public class Basket {
 
     private double vatFactor;
     private List<BasketEntry> entries = new ArrayList<BasketEntry>();
+    private List<Payment> payments = new ArrayList<Payment>();
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
 
     public double getVatFactor() {
         return vatFactor;
@@ -56,6 +61,18 @@ public class Basket {
         return totalAmount;
     }
 
+    public double calculatePaidPrice() {
+        double result = .0;
+        for (Payment payment : payments) {
+            result += payment.getAmount();
+        }
+        return result;
+    }
+
+    public double calculateOutstandingPrice() {
+        return calculateTotalPrice() - calculatePaidPrice();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -69,6 +86,17 @@ public class Basket {
             sb.append(entry.toString());
             sb.append('\n');
         }
+        sb.append("-----------------------------------------------------------------\n");
+        sb.append("Payments:\n");
+        for (Payment payment : payments) {
+            sb.append(payment.toString()).append('\n');
+        }
+        sb.append(String.format(
+                "--- Amount paid: %.2f / Outstanding price: %.2f",
+                calculatePaidPrice(),
+                calculateOutstandingPrice()
+        ));
+
         return sb.toString();
     }
 
@@ -81,6 +109,13 @@ public class Basket {
         }
         BasketEntry entry = new BasketEntry(article, amount);
         entries.add(entry);
+    }
+
+    public void addPayment(Payment payment) {
+        if (payment.getAmount() > calculateOutstandingPrice()) {
+            throw new RuntimeException("Payment cannot be bigger than outstanding price.");
+        }
+        payments.add(payment);
     }
 
     /**
