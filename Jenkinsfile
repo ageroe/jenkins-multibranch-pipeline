@@ -4,8 +4,7 @@ node {
    }
     try{
         stage('Build / Test') {
-            bat 'gradle.bat build'
-            bat 'gradle.bat jacocoTestReport'
+            bat 'gradle.bat build jacocoTestReport'
         }
     } finally {
         stage ('Finish') {
