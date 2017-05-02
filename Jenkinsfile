@@ -1,5 +1,8 @@
 node {
-
+   stage('Preparation') {
+        cleanWs()
+        git branch: 'test', url: 'https://github.com/ageroe/jenkins-multibranch-pipeline.git'
+   }
     try{
         stage('Build / Test') {
             bat 'gradle.bat build jacocoTestReport'
