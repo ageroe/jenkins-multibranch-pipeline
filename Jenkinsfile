@@ -1,7 +1,8 @@
 node {
    stage('Preparation') {
         cleanWs()
-        git branch: 'test', url: 'https://github.com/ageroe/jenkins-multibranch-pipeline.git'
+        //git branch: 'test', url: 'https://github.com/ageroe/jenkins-multibranch-pipeline.git'
+        checkout scm
    }
     try{
         stage('Build / Test') {
